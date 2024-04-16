@@ -1,13 +1,12 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { desc } from "drizzle-orm";
 import { db } from "~/server/db";
+import { getOneUserImages } from "~/server/db/queries";
 
 export const dynamic = "force-dynamic"
 
 async function Images(){
-  const images = await db.query.images.findMany({
-    orderBy: (model, { desc }) => desc(model.id)
-  });
+  const images = await getOneUserImages()
   return(
     <div className="flex flex-wrap gap-4">
           {images.map((image) => (
