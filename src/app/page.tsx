@@ -1,6 +1,5 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { desc } from "drizzle-orm";
-import { db } from "~/server/db";
+import Image from "next/image";
 import { getOneUserImages } from "~/server/db/queries";
 
 export const dynamic = "force-dynamic"
@@ -11,9 +10,11 @@ async function Images(){
     <div className="flex flex-wrap gap-4">
           {images.map((image) => (
             <div key={image.id} className="w-48 flex flex-col">
-              <img
+              <Image
                 src={image.url}
                 alt={image.name}
+                width={300}
+                height={300}
               />
               <div>{image.name}</div>
             </div>
